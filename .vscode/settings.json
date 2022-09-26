@@ -1,0 +1,13 @@
+{
+    "cSpell.words": [
+        "astro",
+        "astrojs"
+    ],
+    "grammarly.selectors": [
+        {
+            "language": "astro",
+            "scheme": "file",
+            "pattern": "src/pages/index.astro"
+        }
+    ]
+}

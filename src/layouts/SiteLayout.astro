@@ -1,0 +1,49 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const headerTitle = title ?? "Software Engineer & Indie Hacker";
+const headerDesc = description ?? "Philip Balbas - Software Engineer";
+---
+
+<!--
+
+<Container className="mt-16 sm:mt-32">
+  <>
+    <header class="max-w-2xl">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">{title}</h1>
+      <p class="mt-6 text-base text-zing-600 dark:text-zinc-400">{intro}</p>
+    </header>
+    <div class="mt-16 sm:mt-20">{children}</div>
+  </>
+</Container> --><!DOCTYPE html>
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Philip Balbas | {headerTitle}</title>
+    <meta name="description" content={headerDesc} />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="flex h-full flex-col bg-zinc-50 dark:bg-black">
+    <div class="fixed inset-0 flex justify-center sm:px-8">
+      <div class="flex w-full max-w-7xl lg:px-8">
+        <div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zing-300/20"></div>
+      </div>
+    </div>
+    <div class="relative">
+      <Header />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

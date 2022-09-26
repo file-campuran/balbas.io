@@ -1,0 +1,58 @@
+---
+import Container from "../components/Container.astro";
+import SocialLink from "../components/SocialLink.astro";
+import Twitter from "../components/icons/Twitter.astro";
+import Github from "../components/icons/Github.astro";
+import LinkedIn from "../components/icons/LinkedIn.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const socials = [
+  {
+    href: "https://twitter.com/yvesbalbas",
+    ariaLabel: "Follow on Twitter",
+    icon: Twitter,
+  },
+  {
+    href: "https://github.com/philipbalbas",
+    ariaLabel: "Follow on Github",
+    icon: Github,
+  },
+  {
+    href: "https://www.linkedin.com/in/philip-balbas-262286199",
+    ariaLabel: "Follow on LinkedIn",
+    icon: LinkedIn,
+  },
+];
+---
+
+<SiteLayout>
+  <Container className="mt-9">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">Philip Balbas</h1>
+      <h2 class="text-2xl">
+        <span class="">Software Engineer</span> and <span class="relative">
+          <span class="block absolute -inset-1 -skew-y-3 bg-indigo-600" aria-hidden="true"></span>
+          <span class="relative text-white">Indie Hacker</span>
+        </span>
+      </h2>
+      <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+        Hi, I'm Philip, a full-stack software engineer and indie hacker based in the Philippines. I make products that
+        interest me and enrich others. On my off hours, I enjoy training, karaoke, reading, and honing artistic
+        pursuits. I love learning more about augmented reality, machine learning, design and marketing.
+      </p>
+      <div class="mt-6 flex gap-6">
+        {socials.map((social) => <SocialLink href={social.href} ariaLabel={social.ariaLabel} icon={social.icon} />)}
+      </div>
+    </div>
+  </Container>
+  <Container className="mt-4 md:mt-28">
+    <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+        <div class="flex flex-col gap-16">
+            Articls
+        </div>
+        <div class="space-y-10 lg:pl-16 xl:pl-24">
+            REsume
+        </div>
+    </div>
+  </Container>
+</SiteLayout>
