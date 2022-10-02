@@ -14,12 +14,12 @@ import ThemeToggle from "./ThemeToggle";
           <Logo />
         </div>
         <div class="flex flex-1 justify-end md:justify-center">
-          <MobileNav client:load className="pointer-events-auto md:hidden" />
+          <MobileNav client:idle client:visible className="pointer-events-auto md:hidden" />
           <DesktopNav className="pointer-events-auto hidden md:block" />
         </div>
         <div class="flex justify-end md:flex-1">
           <div class="pointer-events-auto">
-            <ThemeToggle client:load />
+            <ThemeToggle client:idle />
           </div>
         </div>
       </div>

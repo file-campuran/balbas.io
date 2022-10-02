@@ -14,7 +14,9 @@ export default defineConfig({
     react(),
     solidJs(),
     svelte(),
-    vue(),
+    vue({
+      jsx: true,
+    }),
     image({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),

@@ -9,7 +9,7 @@ interface Props {
 export default function MobileNavItem({ href, children }: Props) {
   return (
     <li>
-      <Popover.Button as="a" href={href} className="block-py">
+      <Popover.Button as="a" href={href} className="block py-2">
         {children}
       </Popover.Button>
     </li>

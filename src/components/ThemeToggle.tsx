@@ -1,38 +1,69 @@
-import React from 'react'
+import { createEffect, createSignal } from "solid-js";
+import clsx from "clsx";
+import Moon from "./icons/Moon";
+import Sun from "./icons/Sun";
 
-const themes = ['light', 'dark']
-import clsx from 'clsx'
-import Moon from './icons/Moon'
-import Sun from './icons/Sun'
+type theme = "light" | "dark";
+const themes: theme[] = ["light", "dark"];
 
-// On page load or when changing themes, best to add inline in `head` to avoid FOUC
-// if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-//     document.documentElement.classList.add('dark')
-//   } else {
-//     document.documentElement.classList.remove('dark')
-//   }
-
-//   // Whenever the user explicitly chooses light mode
-//   localStorage.theme = 'light'
-
-//   // Whenever the user explicitly chooses dark mode
-//   localStorage.theme = 'dark'
-
-//   // Whenever the user explicitly chooses to respect the OS preference
-//   localStorage.removeItem('theme')
-
-
+/** @jsxImportSource solid-js */
 export default function ThemeToggle() {
-    return <div className="inline-flex items-center p-[1px] rounded-3xl bg-orange-300 dark:bg-zinc-600">
-        {themes.map(t => {
-            // const checked = t === them
-            return <button key={t}
-            className={clsx('cursor-pointer rounded-3xl p-2 bg-white text-black', )}
-             >
-                <Sun />
-                <Moon />
+  const [theme, setTheme] = createSignal(
+    (function () {
+      if (import.meta.env.SSR) {
+        return undefined;
+      }
+      if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+        return localStorage.getItem("theme");
+      }
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+      return "light";
+    })()
+  );
 
-            </button>
-        })}
+  const toggleTheme = () => {
+    const t = theme() === "light" ? "dark" : "light";
+    localStorage.setItem("theme", t);
+    setTheme(t);
+  };
+
+  createEffect(() => {
+    const root = document.documentElement;
+    if (theme() === "light") {
+      root.classList.remove("dark");
+    } else {
+      root.classList.add("dark");
+    }
+  });
+
+  return (
+    <div className="inline-flex items-center p-[1px] rounded-3xl bg-orange-300 dark:bg-zinc-600">
+      {themes.map((t) => {
+        const checked = t === theme();
+        return (
+          <button
+            key={t}
+            className={clsx("cursor-pointer rounded-3xl p-2 text-black", checked ? "bg-white" : "")}
+            onClick={toggleTheme}
+          >
+            {t === "light" ? (
+              <Sun
+                className="h-4 w-4"
+                primaryClass="fill-amber-400 dark:fill-slate-800"
+                secondaryClass="fill-orange-400 dark:fill-slate-800"
+              />
+            ) : (
+              <Moon
+                className="h-4 w-4"
+                primaryClass="fill-slate-100 dark:fill-indigo-500"
+                secondaryClass="fill-slate-100 dark:fill-blue-800"
+              />
+            )}
+          </button>
+        );
+      })}
     </div>
+  );
 }
